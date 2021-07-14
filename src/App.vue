@@ -8,12 +8,14 @@
   </div> -->
   {{$store.state.user.profile}}
   <button @click="$store.commit('user/setUser',{id:3,username:'小王'})">修改user模块,测试持久化调用</button>
+  <button @click="hClick">修改user模块,测试持久化调用</button>
   <router-view />
 </template>
 
 <script>
 // 导入
 import { useStore } from 'vuex'
+import request from '@/utils/request.js'
 export default ({
   setup () {
     // 调用
@@ -22,7 +24,10 @@ export default ({
       // 去调用 mutations
       store.commit('addSalary', 1000)
     }
-    return { add }
+    const hClick = () => {
+      request('/member/cart/count', 'GET')
+    }
+    return { add, hClick }
   }
 })
 </script>
