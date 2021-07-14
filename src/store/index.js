@@ -4,7 +4,7 @@
 // export default new Vuex.Store({
 
 // })
-import { createStore } from 'vuex'
+import { createStore, createLogger } from 'vuex'
 import cart from './module/cart'
 import category from './module/category'
 import user from './module/user'
@@ -50,6 +50,7 @@ export default createStore({
     createPersistedstate({
       key: 'erabbit-client-pc-store', // 起个名
       paths: ['user', 'cart'] // 要做持久化的模块
-    })
+    }),
+    createLogger()
   ]
 })
