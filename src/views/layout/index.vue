@@ -5,6 +5,7 @@
   <!-- 菜单分类 -->
   <!-- <header>2.菜单-分类</header> -->
   <AppHeader />
+  <AppHeaderSticky />
   <!-- 主体 -->
   <main>
     <!-- 主体出口 -->
@@ -19,12 +20,19 @@
 import TopNav from './component/topnav'
 import AppHeader from './component/header.vue'
 import Footer from './component/footer.vue'
+import AppHeaderSticky from './component/app-header-sticky.vue'
+import { useStore } from 'vuex'
 export default {
   name: 'Layout',
   components: {
     TopNav,
     AppHeader,
-    Footer
+    Footer,
+    AppHeaderSticky
+  },
+  setup () {
+    const store = useStore()
+    store.dispatch('category/getList')
   }
 }
 </script>

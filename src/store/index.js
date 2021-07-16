@@ -49,7 +49,7 @@ export default createStore({
   plugins: [
     createPersistedstate({
       key: 'erabbit-client-pc-store', // 起个名
-      paths: ['user', 'cart'] // 要做持久化的模块
+      paths: ['user', 'cart', 'category'] // 要做持久化的模块
     }),
     createLogger()
   ]
