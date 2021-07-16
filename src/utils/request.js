@@ -10,12 +10,12 @@ const instance = axios.create({
 
 // 请求拦截器
 instance.interceptors.request.use(
-  config => {
+  aconfig => {
     const token = store.state.user.profile.token
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+      aconfig.headers.Authorization = `Bearer ${token}`
     }
-    return config
+    return aconfig
   }
 )
 // 相应拦截器

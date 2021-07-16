@@ -6,6 +6,7 @@
     <button @click="add">加薪</button>
     <button @click="$store.dispatch('jumpTo','baidu')">跳槽</button>
   </div> -->
+  <p class="container">hahahha </p>
   {{$store.state.user.profile}}
   <button @click="$store.commit('user/setUser',{id:3,username:'小王'})">修改user模块,测试持久化调用</button>
   <button @click="hClick">修改user模块,测试持久化调用</button>
@@ -33,24 +34,8 @@ export default ({
 </script>
 
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.container {
+  color: @xtxColor;
+  .hoverShadow();
 }
 </style>
