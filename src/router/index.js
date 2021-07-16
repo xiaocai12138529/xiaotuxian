@@ -6,14 +6,21 @@
 // })
 
 import { createRouter, createWebHashHistory } from 'vue-router'
-// import Home from '../views/Home.vue'
+import Layout from '@/views/layout'
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home
-  // }
+  {
+    path: '/',
+    name: 'Layout',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'Home',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/home')
+      }
+    ]
+  }
   // {
   //   path: '/about',
   //   name: 'About',
