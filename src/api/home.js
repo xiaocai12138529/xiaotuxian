@@ -9,3 +9,7 @@ export const findBrand = (limit = 6) => {
 export const findBanner = () => {
   return request('/home/banner', 'get')
 }
+// 主页-发现好物
+export const findNew = () => {
+  return request('home/new', 'get')
+}
