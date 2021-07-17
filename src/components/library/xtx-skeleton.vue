@@ -7,7 +7,7 @@
     <!-- 1 盒子-->
     <div
       class="block"
-      :style="{backgroundColor:bg}"
+      :style="{backgroundImage:bg}"
     ></div>
     <!-- 2 闪效果 xtx-skeleton 伪元素 --->
   </div>
@@ -19,7 +19,7 @@ export default {
   props: {
     bg: {
       type: String,
-      default: '#efefef'
+      default: 'linear-gradient(to right, #ff9569 0%, #e92758 100%)'
     },
     width: {
       type: String,
@@ -31,7 +31,7 @@ export default {
     },
     animated: {
       type: Boolean,
-      default: false
+      default: true
     }
   }
 }

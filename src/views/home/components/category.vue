@@ -3,28 +3,54 @@
     class='home-category'
     @mouseleave="cateId = null"
   >
-    <ul class="menu">
-      <li
-        v-for="item in cateList"
-        :key="item.id"
-        @mouseenter="cateId = item.id"
-        :class="{active: cateId === item.id}"
-      >
-        <RouterLink to="/">{{item.name}}</RouterLink>
-        <template v-if="item.children">
-          <RouterLink
-            to="/"
-            v-for="i in item.children"
-            :key="i.id"
-          >{{i.name}}</RouterLink>
-          <!-- <RouterLink to="/">二级类目</RouterLink> -->
-        </template>
-      </li>
+    <template v-if="$store.state.category.list.length > 0">
+      <ul class="menu">
+        <li
+          v-for="item in cateList"
+          :key="item.id"
+          @mouseenter="cateId = item.id"
+          :class="{active: cateId === item.id}"
+        >
+          <RouterLink to="/">{{item.name}}</RouterLink>
+          <template v-if="item.children">
+            <RouterLink
+              to="/"
+              v-for="i in item.children"
+              :key="i.id"
+            >{{i.name}}</RouterLink>
+            <!-- <RouterLink to="/">二级类目</RouterLink> -->
+          </template>
+        </li>
+      </ul>
+    </template>
+    <template v-else>
+      <ul class="menu">
+        <li
+          v-for="item in 10"
+          :key="item"
+        >
+          <xtx-skeleton
+            width='32px'
+            height="21px"
+            style="margin-right: 3px"
+          />
+          <xtx-skeleton
+            width='56px'
+            height="19px"
+            style="margin-right: 3px"
+          />
+          <xtx-skeleton
+            width='56px'
+            height="19px"
+            style="margin-right: 3px"
+          />
+        </li>
+      </ul>
+    </template>
 
-    </ul>
     <!-- 弹层 -->
     <div class="layer">
-      <h4>分类推荐 <small>根据您的购买或浏览记录推荐</small></h4>
+      <h4 v-if="goodsList">{{goodsList.id==='brand'?'品牌':'分类'}}推荐 <small>根据您的购买或浏览记录推荐</small></h4>
       <ul v-if="goodsList">
         <li
           v-for="item in goodsList.goods"
@@ -43,9 +69,9 @@
           </RouterLink>
         </li>
         <template v-if="cateId === 'brand'">
-          <!-- <li
+          <li
             class="brand"
-            v-for="item in currCategory.brands"
+            v-for="item in goodsList.brands"
             :key="item.id"
           >
             <RouterLink to="/">
@@ -59,7 +85,7 @@
                 <p class="desc ellipsis-2">{{item.desc}}</p>
               </div>
             </RouterLink>
-          </li> -->
+          </li>
         </template>
       </ul>
     </div>
@@ -70,7 +96,9 @@
 import { computed, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
 import { findBrand } from '@/api/home.js'
+import xtxSkeleton from '@/components/library/xtx-skeleton.vue'
 export default {
+  components: { xtxSkeleton },
   name: 'HomeCategory',
   setup () {
     // vuex
