@@ -4,6 +4,7 @@
       <li
         v-for="item in cateList"
         :key="item.id"
+        @mouseenter="cateId = item.id"
       >
         <RouterLink to="/">{{item.name}}</RouterLink>
         <template v-if="item.children">
@@ -19,20 +20,20 @@
     <!-- 弹层 -->
     <div class="layer">
       <h4>分类推荐 <small>根据您的购买或浏览记录推荐</small></h4>
-      <ul>
+      <ul v-if="goodsList">
         <li
-          v-for="i in 9"
-          :key="i"
+          v-for="item in goodsList.goods"
+          :key="item.id"
         >
           <RouterLink to="/">
             <img
-              src="https://yanxuan-item.nosdn.127.net/5a115da8f2f6489d8c71925de69fe7b8.png"
               alt=""
+              :src="item.picture"
             >
             <div class="info">
-              <p class="name ellipsis-2">【定金购】严选零食大礼包（12件）</p>
-              <p class="desc ellipsis">超值组合装，满足馋嘴欲</p>
-              <p class="price"><i>¥</i>100.00</p>
+              <p class="name ellipsis-2">{{item.name}}</p>
+              <p class="desc ellipsis">{{item.desc}}</p>
+              <p class="price"><i>¥</i>{{item.price}}</p>
             </div>
           </RouterLink>
         </li>
@@ -42,14 +43,16 @@
 </template>
 
 <script>
-import { computed, reactive } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
 export default {
   name: 'HomeCategory',
   setup () {
+    // vuex
     const store = useStore()
+    // 品牌对象
     const brand = reactive({
-      id: '',
+      id: 'brand',
       name: '品牌',
       children: [{ id: '', name: '推荐品牌' }]
     })
@@ -59,13 +62,23 @@ export default {
         return {
           id: item.id,
           name: item.name,
-          children: item.children && item.children.slice(0, 2)
+          children: item.children && item.children.slice(0, 2),
+          goods: item.goods
         }
       })
       list.push(brand)
       return list
     })
-    return { cateList }
+
+    // 鼠标进入显示
+    const cateId = ref(0) // 鼠标移入取值
+    // 计算属性获取goods
+    const goodsList = computed(() => {
+      const list = cateList.value.find(item => item.id === cateId.value)
+      console.log(list)
+      return list
+    })
+    return { cateList, cateId, goodsList }
   }
 }
 </script>
