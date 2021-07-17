@@ -20,6 +20,7 @@
           <!-- <RouterLink to="/">二级类目</RouterLink> -->
         </template>
       </li>
+
     </ul>
     <!-- 弹层 -->
     <div class="layer">
@@ -41,6 +42,25 @@
             </div>
           </RouterLink>
         </li>
+        <template v-if="cateId === 'brand'">
+          <!-- <li
+            class="brand"
+            v-for="item in currCategory.brands"
+            :key="item.id"
+          >
+            <RouterLink to="/">
+              <img
+                :src="item.picture"
+                alt=""
+              >
+              <div class="info">
+                <p class="place"><i class="iconfont icon-dingwei"></i>{{item.place}}</p>
+                <p class="name ellipsis">{{item.name}}</p>
+                <p class="desc ellipsis-2">{{item.desc}}</p>
+              </div>
+            </RouterLink>
+          </li> -->
+        </template>
       </ul>
     </div>
   </div>
@@ -49,6 +69,7 @@
 <script>
 import { computed, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
+import { findBrand } from '@/api/home.js'
 export default {
   name: 'HomeCategory',
   setup () {
@@ -58,7 +79,11 @@ export default {
     const brand = reactive({
       id: 'brand',
       name: '品牌',
-      children: [{ id: '', name: '推荐品牌' }]
+      children: [{ id: 'brand-children', name: '推荐品牌' }],
+      brands: []
+    })
+    findBrand().then(data => {
+      brand.brands = data.result
     })
     // 使用计算属性从vuex中获取分类
     const cateList = computed(() => {
@@ -175,6 +200,24 @@ export default {
               i {
                 font-size: 16px;
               }
+            }
+          }
+        }
+      }
+      li.brand {
+        height: 180px;
+        a {
+          align-items: flex-start;
+          img {
+            width: 120px;
+            height: 160px;
+          }
+          .info {
+            p {
+              margin-top: 8px;
+            }
+            .place {
+              color: #999;
             }
           }
         }
