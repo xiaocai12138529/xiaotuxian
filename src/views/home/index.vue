@@ -4,10 +4,11 @@
       <div class="container">
         <!-- 左侧分类 -->
         <HomeCategory />
+        <!-- 轮播图 -->
+        <HomeBanner />
       </div>
     </div>
   </div>
-  <HomeBanner />
 </template>
 
 <script>
