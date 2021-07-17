@@ -1,11 +1,20 @@
 <template>
   <div class="home-banner">
-    <XtxCarousel />
+    <XtxCarousel :siders='siders' />
   </div>
 </template>
 <script>
+import { findBanner } from '@/api/home'
+import { ref } from 'vue'
 export default {
-  name: 'HomeBanner'
+  name: 'HomeBanner',
+  setup () {
+    const siders = ref(null)
+    findBanner().then(data => {
+      siders.value = data.result
+    })
+    return { siders }
+  }
 }
 </script>
 <style scoped lang="less">

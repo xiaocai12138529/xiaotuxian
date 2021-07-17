@@ -1,10 +1,19 @@
 <template>
-  <div class='xtx-carousel'>
+  <div
+    class='xtx-carousel'
+    @mouseenter="stop()"
+    @mouseleave="start()"
+  >
     <ul class="carousel-body">
-      <li class="carousel-item fade">
+      <li
+        class="carousel-item"
+        v-for="(item, inx) in siders"
+        :key="item.id"
+        :class="{fade: curIdx === inx}"
+      >
         <RouterLink to="/">
           <img
-            src="http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-04-15/1ba86bcc-ae71-42a3-bc3e-37b662f7f07e.jpg"
+            :src="item.imgUrl"
             alt=""
           >
         </RouterLink>
@@ -13,23 +22,75 @@
     <a
       href="javascript:;"
       class="carousel-btn prev"
+      @click="toggle(-1)"
     ><i class="iconfont icon-angle-left"></i></a>
     <a
       href="javascript:;"
       class="carousel-btn next"
+      @click="toggle(1)"
     ><i class="iconfont icon-angle-right"></i></a>
     <div class="carousel-indicator">
       <span
-        v-for="i in 5"
+        v-for="(i, inx) in 5"
         :key="i"
+        :class="{ active: inx === curIdx}"
       ></span>
     </div>
   </div>
 </template>
 
 <script>
+import { ref, onUnmounted, watch } from 'vue'
 export default {
-  name: 'XtxCarousel'
+  name: 'XtxCarousel',
+  props: {
+    siders: { type: Array, default: () => [] },
+    autoPlay: { type: Boolean, default: true }, // 是否自动播放
+    duration: { type: Number, default: 1000 } // 间隔事件
+  },
+  setup (props) {
+    const curIdx = ref(0) // 显示的图片
+    let timer = '' // 定时器
+    const autoPlayFn = () => {
+      timer = setInterval(() => {
+        curIdx.value++
+        if (curIdx.value >= props.siders.length) curIdx.value = 0
+      }, props.duration)
+    }
+    // 是否自动播放
+    // if (props.autoPlay) { autoPlayFn() }
+    watch(() => props.siders, (newValue, oldValue) => {
+      if (newValue.length > 0 && props.autoPlay) {
+        autoPlayFn()
+      }
+    })
+    // 清除定时器
+    onUnmounted(() => { clearInterval(timer) })
+    // 鼠标移入事件
+    const stop = () => {
+      if (timer) clearInterval(timer)
+    }
+    // 鼠标移出事件
+    const start = () => {
+      if (props.siders.length && props.autoPlay) {
+        autoPlayFn()
+      }
+    }
+    // 上一张 下一张
+    const toggle = (step) => {
+      const newIndex = curIdx.value + step
+      if (newIndex >= props.siders.length) {
+        curIdx.value = 0
+        return
+      }
+      if (newIndex < 0) {
+        curIdx.value = props.siders.length - 1
+        return
+      }
+      curIdx.value = newIndex
+    }
+    return { curIdx, stop, start, toggle }
+  }
 }
 </script>
 <style scoped lang="less">
