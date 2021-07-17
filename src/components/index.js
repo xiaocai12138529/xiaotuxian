@@ -1,4 +1,4 @@
-import XtxSkeleton from './library/xtx-skeleton.vue'
+import XtxSkeleton from './xtx-skeleton.vue'
 import XtxCarousel from '@/components/xtx-carousel.vue'
 
 const MyPlugin = {
