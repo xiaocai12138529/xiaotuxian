@@ -6,6 +6,7 @@
     <ul
       ref="pannel"
       class="goods-list"
+      v-if="goods.length"
     >
       <li
         v-for="item in goods"
@@ -21,6 +22,7 @@
         </RouterLink>
       </li>
     </ul>
+    <HomeSkeleton v-else />
   </HomePanel>
 </template>
 
@@ -28,9 +30,10 @@
 import { ref } from 'vue'
 import HomePanel from './home-Pannel.vue'
 import { findHot } from '@/api/home'
+import HomeSkeleton from './home-skeleton.vue'
 export default {
   name: 'HomeNew',
-  components: { HomePanel },
+  components: { HomePanel, HomeSkeleton },
   setup () {
     const goods = ref([])
     findHot().then(data => {

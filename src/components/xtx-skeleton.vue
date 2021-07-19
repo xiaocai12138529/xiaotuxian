@@ -19,7 +19,7 @@ export default {
   props: {
     bg: {
       type: String,
-      default: 'linear-gradient(to right, #ff9569 0%, #e92758 100%)'
+      default: 'linear-gradient(to right, #27BB9A 0%, #6CFFDE 100%)'
     },
     width: {
       type: String,

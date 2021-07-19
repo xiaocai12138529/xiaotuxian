@@ -8,7 +8,10 @@
         <XtxMore path="/" />
       </template>
       <!-- 面板内容 -->
-      <ul class="goods-list">
+      <ul
+        class="goods-list"
+        v-if="goods.length"
+      >
         <li
           v-for="item in goods"
           :key="item.id"
@@ -23,6 +26,7 @@
           </RouterLink>
         </li>
       </ul>
+      <HomeSkeleton v-else />
     </HomePanel>
   </div>
 </template>
@@ -30,10 +34,10 @@
 import { ref } from 'vue'
 import { findNew } from '@/api/home'
 import HomePanel from './home-Pannel.vue'
-
+import HomeSkeleton from './home-skeleton.vue'
 export default {
   name: 'HomeNew',
-  components: { HomePanel },
+  components: { HomePanel, HomeSkeleton },
   setup () {
     const goods = ref([])
     findNew().then(data => {
