@@ -10,6 +10,8 @@
         <HomeNew />
         <!-- 人气推荐 -->
         <HomeHot />
+        <!-- 热梦品牌 -->
+        <HomeBrand />
       </div>
     </div>
   </div>
@@ -20,13 +22,15 @@ import HomeBanner from './components/banner.vue'
 import HomeCategory from './components/category.vue'
 import HomeNew from './components/home-new.vue'
 import HomeHot from './components/home-hot.vue'
+import HomeBrand from './components/home-brand.vue'
 export default {
   name: 'Home',
   components: {
     HomeBanner,
     HomeCategory,
     HomeNew,
-    HomeHot
+    HomeHot,
+    HomeBrand
   }
 
 }

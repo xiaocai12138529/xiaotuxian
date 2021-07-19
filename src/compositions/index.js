@@ -3,6 +3,8 @@ import { useIntersectionObserver } from '@vueuse/core'
 
 /**
  * 数据懒加载
+ * fn() 要执行的方法
+ * return 观察的dom元素
  */
 export default (fn) => {
   // 1. stop 是一个函数。如果调用它，就会停止观察（是否进入或移出可视区域的行为）
