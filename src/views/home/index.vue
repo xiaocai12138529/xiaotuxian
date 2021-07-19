@@ -12,6 +12,8 @@
         <HomeHot />
         <!-- 热梦品牌 -->
         <HomeBrand />
+        <!-- 商品区块 -->
+        <HomeProduct />
       </div>
     </div>
   </div>
@@ -23,6 +25,7 @@ import HomeCategory from './components/category.vue'
 import HomeNew from './components/home-new.vue'
 import HomeHot from './components/home-hot.vue'
 import HomeBrand from './components/home-brand.vue'
+import HomeProduct from './components/home-product.vue'
 export default {
   name: 'Home',
   components: {
@@ -30,7 +33,8 @@ export default {
     HomeCategory,
     HomeNew,
     HomeHot,
-    HomeBrand
+    HomeBrand,
+    HomeProduct
   }
 
 }
