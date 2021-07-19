@@ -5,7 +5,7 @@
       class="image"
     >
       <img
-        :src="goods.picture"
+        v-imgLazy="goods.picture"
         alt=""
       />
     </RouterLink>

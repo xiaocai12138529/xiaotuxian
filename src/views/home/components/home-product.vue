@@ -25,7 +25,7 @@
             to="/"
           >
             <img
-              :src="cate.picture"
+              v-imgLazy="cate.picture"
               alt=""
             >
             <strong class="label">

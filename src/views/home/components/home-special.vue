@@ -16,7 +16,7 @@
         >
           <RouterLink to="/">
             <img
-              :src="item.cover"
+              v-imgLazy="item.cover"
               alt
             />
             <div class="meta">

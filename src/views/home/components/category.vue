@@ -59,7 +59,7 @@
           <RouterLink to="/">
             <img
               alt=""
-              :src="item.picture"
+              v-imgLazy="item.picture"
             >
             <div class="info">
               <p class="name ellipsis-2">{{item.name}}</p>
@@ -76,7 +76,7 @@
           >
             <RouterLink to="/">
               <img
-                :src="item.picture"
+                v-imgLazy="item.picture"
                 alt=""
               >
               <div class="info">

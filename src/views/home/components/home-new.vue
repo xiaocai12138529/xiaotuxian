@@ -21,7 +21,7 @@
         >
           <RouterLink :to="`/product/${item.id}`">
             <img
-              :src="item.picture"
+              v-imgLazy="item.picture"
               alt=""
             >
             <p class="name ellipsis">{{item.name}}</p>
