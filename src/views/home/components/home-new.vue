@@ -1,5 +1,8 @@
 <template>
-  <div class="home-new">
+  <div
+    class="home-new"
+    ref="target"
+  >
     <HomePanel
       title="新鲜好物"
       sub-title="新鲜出炉 品质靠谱"
@@ -35,15 +38,18 @@ import { ref } from 'vue'
 import { findNew } from '@/api/home'
 import HomePanel from './home-Pannel.vue'
 import HomeSkeleton from './home-skeleton.vue'
+import useLazyData from '@/compositions/index.js'
 export default {
   name: 'HomeNew',
   components: { HomePanel, HomeSkeleton },
   setup () {
     const goods = ref([])
-    findNew().then(data => {
-      goods.value = data.result
+    const target = useLazyData(() => {
+      findNew().then(data => {
+        goods.value = data.result
+      })
     })
-    return { goods }
+    return { goods, target }
   }
 }
 </script>

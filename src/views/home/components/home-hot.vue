@@ -1,29 +1,31 @@
 <template>
-  <HomePanel
-    title="人气推荐"
-    sub-title="人气爆款 不容错过"
-  >
-    <ul
-      ref="pannel"
-      class="goods-list"
-      v-if="goods.length"
+  <div ref="target">
+    <HomePanel
+      title="人气推荐"
+      sub-title="人气爆款 不容错过"
     >
-      <li
-        v-for="item in goods"
-        :key="item.id"
+      <ul
+        ref="pannel"
+        class="goods-list"
+        v-if="goods.length"
       >
-        <RouterLink to="/">
-          <img
-            :src="item.picture"
-            alt=""
-          >
-          <p class="name">{{item.title}}</p>
-          <p class="desc">{{item.alt}}</p>
-        </RouterLink>
-      </li>
-    </ul>
-    <HomeSkeleton v-else />
-  </HomePanel>
+        <li
+          v-for="item in goods"
+          :key="item.id"
+        >
+          <RouterLink to="/">
+            <img
+              :src="item.picture"
+              alt=""
+            >
+            <p class="name">{{item.title}}</p>
+            <p class="desc">{{item.alt}}</p>
+          </RouterLink>
+        </li>
+      </ul>
+      <HomeSkeleton v-else />
+    </HomePanel>
+  </div>
 </template>
 
 <script>
@@ -31,15 +33,21 @@ import { ref } from 'vue'
 import HomePanel from './home-Pannel.vue'
 import { findHot } from '@/api/home'
 import HomeSkeleton from './home-skeleton.vue'
+import useLazyData from '@/compositions'
 export default {
   name: 'HomeNew',
   components: { HomePanel, HomeSkeleton },
   setup () {
     const goods = ref([])
-    findHot().then(data => {
-      goods.value = data.result
+    // findHot().then(data => {
+    //   goods.value = data.result
+    // })
+    const target = useLazyData(() => {
+      findHot().then(data => {
+        goods.value = data.result
+      })
     })
-    return { goods }
+    return { goods, target }
   }
 }
 </script>
