@@ -16,11 +16,13 @@
             :key="i.id"
           >
             <a href="#">
-              <img
-                :src="i.picture"
-                alt=""
-              >
-              <p>{{i.name}}</p>
+              <RouterLink :to="`/categroy/${item.id}`">
+                <img
+                  :src="i.picture"
+                  alt=""
+                >
+                <p>{{i.name}}</p>
+              </RouterLink>
             </a>
           </li>
         </ul>

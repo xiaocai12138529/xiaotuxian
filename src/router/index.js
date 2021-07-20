@@ -21,8 +21,8 @@ const routes = [
       },
       {
         path: '/categroy/:id',
-        name: '/categroy',
-        component: () => { /* webpackChunkName: "about" */ '@/views/categroy' }
+        name: 'categroy',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/categroy')
       }
     ]
   },
