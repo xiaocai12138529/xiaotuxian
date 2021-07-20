@@ -4,15 +4,44 @@
       顶级类目
       <XtxBread separator=">">
         <XtxBreadItem to="/">首页</XtxBreadItem>
-        <XtxBreadItem to='/category/abc'>电器</XtxBreadItem>
+        <XtxBreadItem to='/category'>电器</XtxBreadItem>
       </XtxBread>
+      <!-- 轮播图 -->
+      <XtxCarousel
+        :siders='sliders'
+        style="height: 500px"
+      ></XtxCarousel>
+      <!-- 所有二级分类 -->
+      <div class="sub-list">
+        <h3>全部分类</h3>
+        <ul>
+          <li
+            v-for="i in 8"
+            :key="i"
+          >
+            <a href="javascript:;">
+              <img src="http://zhoushugang.gitee.io/erabbit-client-pc-static/uploads/img/category%20(9).png">
+              <p>空调</p>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { findBanner } from '@/api/home'
+import { ref } from 'vue'
 export default {
-  name: 'TopCategory'
+  name: 'TopCategory',
+  setup () {
+    const sliders = ref([])
+    findBanner().then(data => {
+      sliders.value = data.result
+    })
+    return { sliders }
+  }
 }
 </script>
 
