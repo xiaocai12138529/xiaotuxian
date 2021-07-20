@@ -9,6 +9,7 @@
   <!-- 主体 -->
   <main>
     <!-- 主体出口 -->
+    <!-- <router-view :key="$route.fullPath" /> -->
     <router-view />
   </main>
   <!-- 底部 -->

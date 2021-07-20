@@ -7,7 +7,9 @@
       v-for="item in list "
       :key="item.id"
     >
-      <a href="#">{{item.name}}</a>
+      <RouterLink :to="`/categroy/${item.id}`">
+        <a href="#">{{item.name}}</a>
+      </RouterLink>
       <!--下边是一个弹层内容-->
       <div class="layer">
         <ul>
