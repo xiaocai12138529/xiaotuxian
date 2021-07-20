@@ -2,6 +2,10 @@
   <div class='top-category'>
     <div class="container">
       顶级类目
+      <XtxBread separator=">">
+        <XtxBreadItem to="/">首页</XtxBreadItem>
+        <XtxBreadItem to='/category/abc'>电器</XtxBreadItem>
+      </XtxBread>
     </div>
   </div>
 </template>
