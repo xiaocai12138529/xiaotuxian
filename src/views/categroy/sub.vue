@@ -23,6 +23,11 @@
           />
         </div>
       </div>
+      <XtxInfiniteLoading
+        :isFinished='isFinished'
+        :isLoading='isLoading'
+        @loading='loading'
+      />
     </div>
   </div>
 </template>
@@ -84,12 +89,15 @@ export default {
         subCate.value = data.result
       })
     }
+
     // 筛选事件
     const filterChange = (obj) => {
+      init()
       reqParams = { ...reqParams, ...obj }
       getgoods()
     }
     const sortChange = (sortParams) => {
+      init()
       reqParams = { ...reqParams, ...sortParams }
       getgoods()
       console.log('父组件点击了')
@@ -99,10 +107,34 @@ export default {
     getcate()
     // 路由守卫  路由变化的时候执行一次
     onBeforeRouteUpdate((to) => {
+      init()
       getcate(to.params.id)
     })
 
-    return { subCate, list, filterChange, sortChange }
+    const isLoading = ref(false) // 正在加载
+    const isFinished = ref(false) // 没有数据了
+    const loading = () => {
+      isLoading.value = true
+      findSubCategoryGoods(reqParams).then((res) => {
+        isLoading.value = false
+        console.log(res.result.items.length)
+        if (res.result.items.length) {
+          isFinished.value = false
+          reqParams.page++
+        } else {
+          isFinished.value = true
+        }
+        list.value.push(...res.result.items)
+      })
+    }
+    // 初始化
+    const init = () => {
+      list.value = []
+      reqParams.page = 1
+      isLoading.value = false
+      isFinished.value = false
+    }
+    return { subCate, list, filterChange, sortChange, loading, isFinished, isLoading }
   }
 }
 </script>
