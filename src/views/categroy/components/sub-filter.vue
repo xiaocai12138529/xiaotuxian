@@ -39,19 +39,38 @@
 export default {
   name: 'SubFilter',
   props: { subCate: { type: Object, default: () => ({}) } },
-  setup (props) {
+  setup (props, { emit }) {
+    const getFilterParams = () => {
+      const obj = { brandId: null, attrs: [] }
+      // 品牌
+      const t = props.subCate.brands.find(brand => brand.selected)
+      obj.brandId = t ? t.id : null
+
+      // 销售属性
+      props.subCate.saleProperties.forEach(item => {
+        const prop = item.properties.find(prop => prop.selected)
+        if (prop && prop.name !== '全部') {
+          obj.attrs.push({ groupName: item.name, propertyName: prop.name })
+        }
+      })
+      // 参考数据：{brandId:'',attrs:[{groupName:'',propertyName:''},...]}
+      if (obj.attrs.length === 0) obj.attrs = null
+      // debugger
+      return obj
+    }
     const selectBrand = (brand) => {
       console.log(brand)
       props.subCate.brands.forEach(it => { it.selected = false })
       brand.selected = true
+      emit('filter-change', getFilterParams())
     }
 
     const selectAttr = (prop, sale) => {
       console.log(prop, sale)
       sale.properties.forEach(it => { it.selected = false })
       prop.selected = true
+      emit('filter-change', getFilterParams())
     }
-
     return { selectBrand, selectAttr }
   }
 }

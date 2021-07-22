@@ -40,27 +40,31 @@
         </a>
       </div>
       <div class="check">
-        <input
+        <!-- <input
           type="checkbox"
           v-model="sortParams.inventory"
         />仅显示有货商品
         <input
           type="checkbox"
           v-model="sortParams.onlyDiscount"
-        />仅显示特惠商品
+        />仅显示特惠商品 -->
+        <XtxCheckbox v-model="sortParams.inventory">仅显示有货商品</XtxCheckbox>
+        <XtxCheckbox v-model="sortParams.onlyDiscount">仅显示特惠商品</XtxCheckbox>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
+import XtxCheckbox from './xtx-checkbox.vue'
 export default {
-  setup () {
+  components: { XtxCheckbox },
+  setup (props, { emit }) {
     const sortParams = reactive({
       inventory: false,
       onlyDiscount: false,
       sortField: null,
-      sortMethod: null
+      sortMethod: 'desc'
     })
 
     // publishTime(最新), orderNum(人气), price(价格), evaluateNum(评论)
@@ -78,10 +82,12 @@ export default {
         }
       } else {
         // 如果排序未改变停止逻辑
-        sortParams.sortMethod = null
+        sortParams.sortMethod = 'desc'
       }
     }
-
+    watch(sortParams, () => {
+      emit('sort-change', sortParams)
+    })
     return { changeSort, sortParams }
   }
 }
