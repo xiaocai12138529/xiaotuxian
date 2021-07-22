@@ -18,7 +18,7 @@
             :key="i.id"
           >
             <a href="#">
-              <RouterLink :to="`/categroy/${item.id}`">
+              <RouterLink :to="`/categroy/sub/${i.id}`">
                 <img
                   :src="i.picture"
                   alt=""

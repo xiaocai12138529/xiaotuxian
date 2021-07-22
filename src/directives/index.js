@@ -10,7 +10,7 @@ const useLazyLoad = (target, url) => {
     // observerElement 被观察的dom
     ([{ isIntersecting }], observerElement) => {
       // 在此处可根据isIntersecting来判断，然后做业务
-      console.log('是否可见', isIntersecting, stop)
+      // console.log('是否可见', isIntersecting, stop)
       if (isIntersecting) {
         target.onerror = () => {
           target.src = defaltImg
@@ -30,7 +30,7 @@ export default {
       mounted (el, binding) {
         el.src = defaltImg
         // console.log(el, binding)
-        console.log(binding.value)
+        // console.log(binding.value)
         useLazyLoad(el, binding.value)
       }
     })

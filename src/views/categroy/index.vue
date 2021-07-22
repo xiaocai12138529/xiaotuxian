@@ -17,14 +17,17 @@
       >
         <h3>全部分类</h3>
         <ul>
+
           <li
             v-for="item in cateList"
             :key="item.id"
           >
-            <a href="javascript:;">
-              <img :src="item.picture" />
-              <p>{{ item.name }}</p>
-            </a>
+            <RouterLink :to="`/categroy/sub/${item.id}`">
+              <a href="javascript:;">
+                <img :src="item.picture" />
+                <p>{{ item.name }}</p>
+              </a>
+            </RouterLink>
           </li>
         </ul>
       </div>

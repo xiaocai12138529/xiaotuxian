@@ -14,7 +14,7 @@
       <slot />
     </span>
     <!-- 分隔符 -->
-    <i>{{ separator }}</i>
+    <i> {{ separator }} </i>
   </div>
 </template>
 
@@ -38,6 +38,12 @@ export default {
 <style lang="less" scoped>
 .xtx-bread-item {
   // 最后一个 i 隐藏
+  i {
+    margin: 0 3px;
+  }
+  a:hover {
+    color: aqua;
+  }
   &:nth-last-of-type(1) {
     i {
       display: none;

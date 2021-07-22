@@ -132,7 +132,7 @@ export default {
     // 计算属性获取goods
     const goodsList = computed(() => {
       const list = cateList.value.find(item => item.id === cateId.value)
-      console.log(list)
+      // console.log(list)
       return list
     })
     return { cateList, cateId, goodsList }
