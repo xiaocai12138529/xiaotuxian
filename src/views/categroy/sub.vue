@@ -6,6 +6,8 @@
       <GoodsNav :subCate="subCate"></GoodsNav>
       <!-- 筛选区 -->
       <SubFilter :subCate="subCate" />
+      <!--  -->
+      <SubSort />
     </div>
   </div>
 </template>
@@ -16,9 +18,10 @@ import { findSubCategoryFilter } from '@/api/category.js'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { ref } from 'vue'
 import SubFilter from './components/sub-filter.vue'
+import SubSort from './components/sub-sort.vue'
 export default {
   name: 'SubCategory',
-  components: { GoodsNav, SubFilter },
+  components: { GoodsNav, SubFilter, SubSort },
   setup () {
     const router = useRoute()
     const subCate = ref(null)
