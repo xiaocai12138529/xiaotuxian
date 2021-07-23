@@ -12,6 +12,7 @@
           <!-- 商品图片组件 -->
           <GoodsImage :images="product.mainPictures" />
           <!-- 商品销售信息组件 -->
+          <GoodsSales />
         </div>
         <!--右边-->
         <div class="spec">
@@ -43,12 +44,13 @@
 <script>
 import GoodsBread from './components/goods-bread.vue'
 import GoodsImage from './components/goods-image.vue'
+import GoodsSales from './components/goods-sales'
 import { findGoods } from '@/api/product'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 export default {
   name: 'XtxGoodsPage',
-  components: { GoodsBread, GoodsImage },
+  components: { GoodsBread, GoodsImage, GoodsSales },
   setup () {
     const router = useRoute()
     const product = ref({})
