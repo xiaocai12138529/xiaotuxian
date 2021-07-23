@@ -56,7 +56,7 @@
           v-for="item in goodsList.goods"
           :key="item.id"
         >
-          <RouterLink to="/">
+          <RouterLink :to="`/product/${item.id}`">
             <img
               alt=""
               v-imgLazy="item.picture"

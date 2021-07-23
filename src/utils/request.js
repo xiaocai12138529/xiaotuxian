@@ -4,7 +4,8 @@ import router from '@/router'
 
 // 配置
 const instance = axios.create({
-  baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net/',
+  // baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net/',
+  baseURL: 'https://apipc-xiaotuxian-front.itheima.net/',
   timeout: 5000
 })
 
