@@ -1,13 +1,10 @@
 <template>
   <div class='xtx-goods-page'>
-    <div class="container">
-      <!-- 面包屑 -->
-      <XtxBread>
-        <XtxBreadItem to="/">首页</XtxBreadItem>
-        <XtxBreadItem to="/">手机</XtxBreadItem>
-        <XtxBreadItem to="/">华为</XtxBreadItem>
-        <XtxBreadItem to="/">p30</XtxBreadItem>
-      </XtxBread>
+    <div
+      class="container"
+      v-if="product.categories"
+    >
+      <GoodsBread :product="product" />
       <!-- 商品信息 -->
       <div class="goods-info">商品信息</div>
       <!-- 商品推荐 -->
@@ -30,10 +27,21 @@
 </template>
 
 <script>
-// import GoodsRelevant from './components/goods-relevant'
+import GoodsBread from './components/goods-bread.vue'
+import { findGoods } from '@/api/product'
+import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 export default {
-  name: 'XtxGoodsPage'
-  // components: { GoodsRelevant }
+  name: 'XtxGoodsPage',
+  components: { GoodsBread },
+  setup () {
+    const router = useRoute()
+    const product = ref({})
+    findGoods(router.params.id).then(res => {
+      product.value = res.result
+    })
+    return { product }
+  }
 }
 </script>
 
