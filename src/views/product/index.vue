@@ -17,6 +17,7 @@
         <!--右边-->
         <div class="spec">
           <!-- 商品介绍组件 -->
+          <GoodsName :product="product" />
           <!-- sku组件  -->
           <!-- 数量选择组件 -->
           <!-- 按钮组件 -->
@@ -45,12 +46,13 @@
 import GoodsBread from './components/goods-bread.vue'
 import GoodsImage from './components/goods-image.vue'
 import GoodsSales from './components/goods-sales'
+import GoodsName from './components/goods-name'
 import { findGoods } from '@/api/product'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 export default {
   name: 'XtxGoodsPage',
-  components: { GoodsBread, GoodsImage, GoodsSales },
+  components: { GoodsBread, GoodsImage, GoodsSales, GoodsName },
   setup () {
     const router = useRoute()
     const product = ref({})
