@@ -6,7 +6,21 @@
     >
       <GoodsBread :product="product" />
       <!-- 商品信息 -->
-      <div class="goods-info">商品信息</div>
+      <div class="goods-info">
+        <!--左边-->
+        <div class="media">
+          <!-- 商品图片组件 -->
+          <GoodsImage :images="product.mainPictures" />
+          <!-- 商品销售信息组件 -->
+        </div>
+        <!--右边-->
+        <div class="spec">
+          <!-- 商品介绍组件 -->
+          <!-- sku组件  -->
+          <!-- 数量选择组件 -->
+          <!-- 按钮组件 -->
+        </div>
+      </div>
       <!-- 商品推荐 -->
       <div class='goods-relevant'>
         商品推荐
@@ -28,12 +42,13 @@
 
 <script>
 import GoodsBread from './components/goods-bread.vue'
+import GoodsImage from './components/goods-image.vue'
 import { findGoods } from '@/api/product'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 export default {
   name: 'XtxGoodsPage',
-  components: { GoodsBread },
+  components: { GoodsBread, GoodsImage },
   setup () {
     const router = useRoute()
     const product = ref({})
@@ -49,6 +64,16 @@ export default {
 .goods-info {
   min-height: 600px;
   background: #fff;
+  display: flex;
+  .media {
+    width: 580px;
+    height: 600px;
+    padding: 30px 50px;
+  }
+  .spec {
+    flex: 1;
+    padding: 30px 30px 30px 0;
+  }
 }
 .goods-footer {
   display: flex;
