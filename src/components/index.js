@@ -4,6 +4,7 @@ import XtxCarousel from '@/components/xtx-carousel.vue'
 import XtxBread from '@/components/xtx-bread.vue'
 import XtxBreadItem from '@/components/xtx-bread-item.vue'
 import XtxInfiniteLoading from '@/components/xtx-infinite-loading.vue'
+import XtxCity from '@/components/xtx-city.vue'
 
 const MyPlugin = {
   install (app) {
@@ -13,6 +14,7 @@ const MyPlugin = {
     app.component(XtxBread.name, XtxBread)
     app.component(XtxBreadItem.name, XtxBreadItem)
     app.component(XtxInfiniteLoading.name, XtxInfiniteLoading)
+    app.component(XtxCity.name, XtxCity)
   }
 }
 

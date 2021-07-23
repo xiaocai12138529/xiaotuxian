@@ -12,7 +12,12 @@
     </dl>
     <dl>
       <dt>配送</dt>
-      <dd>至 城市组件</dd>
+      <dd>至
+        <XtxCity
+          :fullLocation='fullLocation'
+          @change="changeCity"
+        />
+      </dd>
     </dl>
     <dl>
       <dt>服务</dt>
@@ -27,6 +32,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
   name: 'GoodName',
   props: {
@@ -34,6 +40,31 @@ export default {
       type: Object,
       default: () => ({})
     }
+  },
+  setup (props) {
+    // 默认情况
+    const provinceCode = ref('110000')
+    const cityCode = ref('119900')
+    const countyCode = ref('110101')
+    const fullLocation = ref('请选择配送地址')
+
+    if (props.userAddresses) {
+      const userAddress = props.userAddresses.find(it => it.isDefault === 1)
+      if (userAddress) {
+        provinceCode.value = userAddress.provinceCode
+        cityCode.value = userAddress.cityCode
+        countyCode.value = userAddress.countyCode
+        fullLocation.value = userAddress.fullLocation
+      }
+    }
+    // 选择城市
+    const changeCity = (result) => {
+      provinceCode.value = result.provinceCode
+      cityCode.value = result.cityCode
+      countyCode.value = result.countyCode
+      fullLocation.value = result.fullLocation
+    }
+    return { fullLocation, changeCity }
   }
 }
 </script>
